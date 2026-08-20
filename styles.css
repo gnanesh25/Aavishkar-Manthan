@@ -591,13 +591,14 @@ p {
    ========================================================================== */
 .hero {
   position: relative;
-  min-height: clamp(620px, 100vh, 900px);
+  min-height: auto;
+  padding-top: clamp(110px, 13vh, 150px);
+  padding-bottom: clamp(54px, 7vh, 84px);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   background: var(--ink);
   color: var(--paper);
   overflow: hidden;
-  padding-top: 120px;
 }
 
 .hero-bg {
@@ -611,10 +612,10 @@ p {
 
 .hero-mark {
   position: absolute;
-  right: clamp(20px, 6vw, 100px);
-  top: 48%;
+  right: clamp(20px, 6vw, 90px);
+  top: 50%;
   transform: translateY(-50%);
-  width: clamp(220px, 28vw, 380px);
+  width: clamp(200px, 26vw, 360px);
   opacity: .85;
   filter: drop-shadow(0 24px 60px rgba(225, 83, 32, .25));
   pointer-events: none;
@@ -1785,13 +1786,13 @@ p {
 
 .timeline {
   position: relative;
-  padding-left: 10px;
+  padding-left: 0;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 140px;
+  left: 120px;
   top: 14px;
   bottom: 14px;
   width: 2px;
@@ -1812,8 +1813,8 @@ p {
 .t-row {
   position: relative;
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 32px;
+  grid-template-columns: 120px 1fr;
+  gap: 40px;
   padding: 0;
   border-bottom: none;
 }
@@ -1822,7 +1823,7 @@ p {
   font-family: var(--f-mono);
   font-size: 13.5px;
   color: var(--ember);
-  padding-right: 28px;
+  padding-right: 24px;
   font-weight: 700;
   text-align: right;
   padding-top: 18px;
@@ -1847,7 +1848,7 @@ p {
 .t-content::before {
   content: '';
   position: absolute;
-  left: -40px;
+  left: -47px;
   top: 22px;
   width: 14px;
   height: 14px;
@@ -2031,7 +2032,7 @@ p {
   .ei-cta{ align-self:flex-start; }
   .detail-layout{ grid-template-columns:1fr; }
   .hero-meta{ grid-template-columns:repeat(3,1fr); gap:16px; }
-  .hero-mark{ width:clamp(160px, 24vw, 260px); right:clamp(16px, 4vw, 40px); opacity:0.6; }
+  .hero-mark{ width:clamp(140px, 20vw, 220px); right:clamp(10px, 3vw, 30px); top:50%; transform:translateY(-50%); opacity:0.65; }
   .footer-top{ grid-template-columns:1fr 1fr; }
   .sponsor-grid{ grid-template-columns:repeat(2,1fr); gap:16px; }
 }
