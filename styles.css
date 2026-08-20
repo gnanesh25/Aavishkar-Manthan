@@ -339,7 +339,7 @@ p{ margin:0; }
 .hero-mark{
   position:absolute;
   right:clamp(10px, 4vw, 80px);
-  top:38%;
+  top:26%;
   transform:translateY(-50%);
   width:min(42vw,520px);
   opacity:.85;
