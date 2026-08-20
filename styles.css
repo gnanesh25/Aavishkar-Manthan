@@ -470,51 +470,117 @@ p{ margin:0; }
 .event-card:hover{ background:#1D1E24; transform:translateY(-4px); border-color:rgba(255,255,255,.18); }
 
 /* ==========================================================================
+   Animations & Keyframes
+   ========================================================================== */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-54%) scale(1.02); }
+}
+
+@keyframes prizeGlow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(240,165,55,0.25)); }
+  50% { filter: drop-shadow(0 0 45px rgba(225,83,32,0.55)); }
+}
+
+@keyframes tagPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes buttonShine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.hero-mark {
+  animation: heroFloat 8s ease-in-out infinite;
+}
+
+.prize-figure {
+  animation: prizeGlow 4s ease-in-out infinite;
+}
+
+.btn-primary {
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: rotate(25deg);
+  transition: none;
+}
+.btn-primary:hover::after {
+  animation: buttonShine 0.85s ease-in-out;
+}
+
+/* ==========================================================================
    Events list — horizontal card redesign (light section)
    ========================================================================== */
 .events-list{
   display:flex; flex-direction:column;
-  border:1px solid var(--line);
-  border-radius:8px;
-  overflow:hidden;
+  gap:28px;
+  border:none;
 }
 .event-item{
   display:grid;
-  grid-template-columns:220px 1fr auto;
-  gap:36px;
+  grid-template-columns:280px 1fr auto;
+  gap:40px;
   align-items:center;
-  padding:36px 40px;
+  padding:42px 48px;
   background:var(--paper);
-  border-bottom:1px solid var(--line);
-  border-left:4px solid transparent;
-  transition:background .3s var(--ease), border-left-color .3s var(--ease), transform .3s var(--ease);
+  border:1px solid var(--line);
+  border-radius:14px;
+  border-left:5px solid transparent;
+  box-shadow:0 4px 24px rgba(0,0,0,0.03);
+  transition:all .4s var(--ease);
   position:relative;
 }
-.event-item:last-child{ border-bottom:none; }
-.event-item:hover{ background:#fff; transform:translateX(6px); }
+.event-item:hover{
+  background:#ffffff;
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(0,0,0,0.09);
+}
 .event-item:nth-child(1):hover{ border-left-color:var(--ember); }
 .event-item:nth-child(2):hover{ border-left-color:var(--amber); }
 .event-item:nth-child(3):hover{ border-left-color:var(--sage); }
 .event-item:nth-child(4):hover{ border-left-color:var(--ember); }
-.ei-left{ display:flex; flex-direction:column; gap:16px; }
-.ei-num{ font-family:var(--f-mono); font-size:11.5px; color:var(--text-2); letter-spacing:.12em; text-transform:uppercase; }
-.ei-logo{ height:42px; width:auto; object-fit:contain; object-position:left; max-width:160px; }
-.ei-body{}
-.ei-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
-.ei-tag{ font-family:var(--f-mono); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-2); border:1px solid var(--line); padding:4px 10px; border-radius:2px; }
-.ei-tag.ember-tag{ color:var(--ember); border-color:var(--ember); background:rgba(225,83,32,.06); }
-.ei-tag.amber-tag{ color:var(--amber); border-color:var(--amber); background:rgba(240,165,55,.08); }
-.ei-tag.sage-tag{ color:var(--sage); border-color:var(--sage); background:rgba(127,176,107,.08); }
-.ei-body p{ color:var(--text-2); font-size:15px; max-width:54ch; line-height:1.65; }
-.ei-cta{
-  font-family:var(--f-mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink);
-  display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
-  border-bottom:1px solid var(--line); padding-bottom:4px; flex:none;
-  transition:border-color .3s var(--ease), gap .3s var(--ease), color .3s var(--ease);
+.ei-left{ display:flex; flex-direction:column; gap:18px; }
+.ei-num{ font-family:var(--f-mono); font-size:12px; color:var(--text-2); letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
+.ei-logo{
+  height:68px; width:auto; object-fit:contain; object-position:left; max-width:240px;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.06));
+  transition:transform .4s var(--ease), filter .4s var(--ease);
 }
-.ei-cta svg{ width:13px; height:13px; transition:transform .3s var(--ease); }
-.event-item:hover .ei-cta{ border-color:var(--ember); color:var(--ember); }
-.event-item:hover .ei-cta svg{ transform:translateX(5px); }
+.event-item:hover .ei-logo{
+  transform:scale(1.08) translateY(-2px);
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+}
+.ei-body{}
+.ei-tags{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.ei-tag{
+  font-family:var(--f-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--text-2); border:1px solid var(--line); padding:5px 12px; border-radius:3px;
+  transition:transform .3s var(--ease);
+}
+.event-item:hover .ei-tag{ transform:translateY(-1px); }
+.ei-tag.ember-tag{ color:var(--ember); border-color:var(--ember); background:rgba(225,83,32,.08); font-weight:600; }
+.ei-tag.amber-tag{ color:var(--amber); border-color:var(--amber); background:rgba(240,165,55,.1); font-weight:600; }
+.ei-tag.sage-tag{ color:var(--sage); border-color:var(--sage); background:rgba(127,176,107,.1); font-weight:600; }
+.ei-body p{ color:var(--text-2); font-size:15.5px; max-width:54ch; line-height:1.68; }
+.ei-cta{
+  font-family:var(--f-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink);
+  display:inline-flex; align-items:center; gap:10px; white-space:nowrap;
+  border-bottom:2px solid var(--line); padding-bottom:6px; flex:none;
+  transition:border-color .3s var(--ease), gap .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+.ei-cta svg{ width:14px; height:14px; transition:transform .3s var(--ease); }
+.event-item:hover .ei-cta{ border-color:var(--ember); color:var(--ember); transform:translateX(3px); }
+.event-item:hover .ei-cta svg{ transform:translateX(6px); }
 .detail-page{ display:none; }
 .detail-page.is-active{ display:block; }
 
