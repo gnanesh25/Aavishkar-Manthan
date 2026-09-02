@@ -526,9 +526,9 @@ p {
 
 .mobile-panel a {
   font-family: var(--f-display);
-  font-size: clamp(28px, 7vw, 40px);
+  font-size: clamp(18px, 5vw, 26px);
   color: var(--paper);
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
 }
 
@@ -1125,11 +1125,11 @@ p {
 }
 
 .ei-logo {
-  height: 68px;
+  height: 90px;
   width: auto;
   object-fit: contain;
   object-position: left;
-  max-width: 240px;
+  max-width: 300px;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
   transition: transform .4s var(--ease), filter .4s var(--ease);
 }
@@ -1272,7 +1272,7 @@ p {
 }
 
 .detail-hero-logo {
-  height: 64px;
+  height: 90px;
   width: auto;
   margin-bottom: 26px;
 }
@@ -2028,7 +2028,7 @@ p {
     padding:32px 30px;
   }
   .ei-left{ gap:12px; }
-  .ei-logo{ height:56px; max-width:200px; }
+  .ei-logo{ height:72px; max-width:260px; }
   .ei-cta{ align-self:flex-start; }
   .detail-layout{ grid-template-columns:1fr; }
   .hero-meta{ grid-template-columns:repeat(3,1fr); gap:16px; }
@@ -2055,7 +2055,8 @@ p {
     font-size:10px;
     padding:5px 10px;
     letter-spacing:.08em;
-    width:100%;
+    width:auto;
+    display:inline-block;
     text-align:left;
   }
   .hero h1{
@@ -2108,14 +2109,28 @@ p {
     background:#ffffff;
     box-shadow:0 4px 20px rgba(0,0,0,0.04);
     gap:12px;
+    grid-template-columns:1fr auto;
+    grid-template-rows:auto auto;
+    grid-template-areas:
+      'body logo'
+      'cta  cta';
   }
-  .ei-left{ gap:8px; }
-  .ei-num{ font-size:10.5px; }
-  .ei-logo{ height:46px; max-width:170px; }
-  .ei-tags{ gap:6px; margin-bottom:8px; }
-  .ei-tag{ font-size:9.5px; padding:3px 8px; }
-  .ei-body p{ font-size:13.5px; line-height:1.55; }
+  .ei-left{
+    gap:6px;
+    grid-area:logo;
+    align-items:flex-end;
+    justify-content:center;
+    flex-direction:column;
+  }
+  .ei-num{ font-size:10.5px; display:none; }
+  .ei-body{ grid-area:body; }
+  .ei-logo{
+    height:64px;
+    max-width:160px;
+    object-position:right;
+  }
   .ei-cta{
+    grid-area:cta;
     display:flex;
     width:100%;
     justify-content:space-between;
@@ -2128,6 +2143,9 @@ p {
     font-size:11.5px;
     font-weight:600;
   }
+  .ei-tags{ gap:6px; margin-bottom:8px; }
+  .ei-tag{ font-size:9.5px; padding:3px 8px; }
+  .ei-body p{ font-size:13.5px; line-height:1.55; }
 
   /* Prize Pool Section Mobile */
   .prize-section{ padding:50px 0; }
@@ -2241,7 +2259,7 @@ p {
   /* Event Detail Pages Mobile */
   .detail-hero{ padding:90px 0 36px; }
   .detail-hero h1{ font-size:clamp(26px, 7vw, 42px); }
-  .detail-hero-logo{ height:40px; margin-bottom:16px; }
+  .detail-hero-logo{ height:60px; margin-bottom:16px; }
   .detail-body{ padding:40px 0; }
   .num-list li{ grid-template-columns:26px 1fr; gap:8px; padding:12px 14px; }
   .side-card{ padding:18px; border-radius:8px; }
@@ -2251,7 +2269,7 @@ p {
   .hero h1{ font-size:26px; }
   .hero-meta .m-val{ font-size:12px; }
   .event-item{ padding:18px 14px; }
-  .ei-logo{ height:38px; }
+  .ei-logo{ height:52px; max-width:140px; }
   .countdown-grid-light{ grid-template-columns:repeat(2, 1fr); gap:6px; }
   .cd-unit-light{ padding:12px 6px; }
   .cd-num-light{ font-size:28px; }
