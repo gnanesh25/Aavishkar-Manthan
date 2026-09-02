@@ -2109,28 +2109,12 @@ p {
     background:#ffffff;
     box-shadow:0 4px 20px rgba(0,0,0,0.04);
     gap:12px;
-    grid-template-columns:1fr auto;
-    grid-template-rows:auto auto;
-    grid-template-areas:
-      'body logo'
-      'cta  cta';
   }
-  .ei-left{
-    gap:6px;
-    grid-area:logo;
-    align-items:flex-end;
-    justify-content:center;
-    flex-direction:column;
-  }
-  .ei-num{ font-size:10.5px; display:none; }
-  .ei-body{ grid-area:body; }
-  .ei-logo{
-    height:64px;
-    max-width:160px;
-    object-position:right;
-  }
+  .ei-left{ gap:8px; }
+  .ei-num{ font-size:10.5px; }
+  .ei-body{ }
+  .ei-logo{ height:46px; max-width:170px; object-position:left; }
   .ei-cta{
-    grid-area:cta;
     display:flex;
     width:100%;
     justify-content:space-between;
