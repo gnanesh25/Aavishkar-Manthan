@@ -57,7 +57,18 @@
   }
 
   window.addEventListener('hashchange', function () { route(true); });
-  document.addEventListener('DOMContentLoaded', function () { route(false); });
+  document.addEventListener('DOMContentLoaded', function () {
+    route(false);
+
+    /* Fix: clicking a link whose hash matches current location doesn't
+       fire hashchange — so we manually call route() on every data-route link. */
+    document.querySelectorAll('a[data-route]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        /* Small delay so the browser updates location.hash first */
+        setTimeout(function () { route(true); }, 0);
+      });
+    });
+  });
 
   /* ---------------------------------------------------------------------
      Nav active state
