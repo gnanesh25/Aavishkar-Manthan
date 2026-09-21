@@ -1653,101 +1653,176 @@ p {
 }
 
 /* ==========================================================================
-   Sponsors (dark section)
+   Sponsors (dark section) — Featured single sponsor layout
    ========================================================================== */
-.sponsor-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  background: transparent;
-  border: none;
+
+/* Keep old classes in case they're needed elsewhere, but hide them */
+.sponsor-grid { display: none; }
+
+/* ── Keyframes ── */
+@keyframes sponsor-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
 }
 
-.sponsor-tile {
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 14px;
-  min-height: 210px;
+@keyframes sponsor-glow-pulse {
+  0%, 100% {
+    opacity: .6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer-slide {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+@keyframes badge-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+
+/* ── Container ── */
+.sponsor-featured {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ── Card ── */
+.sponsor-featured-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 6px;
-  padding: 36px 20px;
-  text-align: center;
-  transition: background .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+  gap: 24px;
+  width: min(520px, 90vw);
+  padding: 52px 48px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .14);
+  overflow: hidden;
+  animation: sponsor-float 6s ease-in-out infinite;
+  transition: box-shadow .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
+  cursor: default;
 }
 
-.sponsor-tile:hover {
-  background: rgba(255, 255, 255, .12);
-  border-color: rgba(255, 255, 255, .28);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, .35);
+.sponsor-featured-card:hover {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(240, 165, 55, .4);
+  box-shadow:
+    0 0 0 1px rgba(240, 165, 55, .15),
+    0 24px 80px rgba(0, 0, 0, .5),
+    0 0 80px rgba(225, 83, 32, .12);
 }
 
-.sponsor-tile .s-name {
-  font-family: var(--f-display);
-  font-size: 18px;
-  margin-top: 6px;
-  color: var(--paper);
-}
-
-.sponsor-tile .s-tier {
-  font-family: var(--f-mono);
-  font-size: 10.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-top: 8px;
-}
-
-.sponsor-tile.placeholder {
-  color: var(--text-inv-2);
-  border: 1px dashed rgba(255, 255, 255, .2);
-  background: rgba(255, 255, 255, .02);
-}
-
-.sponsor-tile.placeholder:hover {
-  border-color: var(--ember);
-  background: rgba(255, 255, 255, .05);
-}
-
-.sponsor-tile.placeholder .s-name {
-  color: var(--text-inv-2);
-  font-size: 12px;
-  font-family: var(--f-mono);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.s-visual {
-  width: 80px;
-  height: 80px;
+/* ── Ambient glow ring behind the card ── */
+.sponsor-glow-ring {
+  position: absolute;
+  inset: -30px;
   border-radius: 50%;
-  margin: 0 auto 6px;
-  background: linear-gradient(135deg, var(--sa), var(--sb));
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(240, 165, 55, .18) 0%,
+    rgba(225, 83, 32, .08) 40%,
+    transparent 70%);
+  animation: sponsor-glow-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Shimmer sweep ── */
+.sponsor-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, .06) 50%,
+    transparent 60%
+  );
+  animation: shimmer-slide 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Logo image ── */
+.sponsor-img-wrap {
+  position: relative;
+  z-index: 2;
+  width: 340px;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--f-display);
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  box-shadow: 0 10px 36px rgba(0, 0, 0, .2);
+}
+
+.sponsor-logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  filter:
+    brightness(1.05)
+    drop-shadow(0 0 20px rgba(255, 255, 255, .2))
+    drop-shadow(0 0 40px rgba(240, 165, 55, .12));
+  transition: filter .45s var(--ease), transform .45s var(--ease);
+}
+
+.sponsor-featured-card:hover .sponsor-logo-img {
+  filter:
+    brightness(1.3)
+    drop-shadow(0 0 28px rgba(255, 255, 255, .4))
+    drop-shadow(0 0 60px rgba(240, 165, 55, .3));
+  transform: scale(1.04);
+}
+
+/* ── Title Sponsor badge ── */
+.sponsor-badge {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(240, 165, 55, .12);
+  border: 1px solid rgba(240, 165, 55, .35);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.sponsor-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: badge-blink 1.8s ease-in-out infinite;
   flex-shrink: 0;
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
 }
 
-.sponsor-tile:hover .s-visual {
-  transform: scale(1.08);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, .28);
+/* ── Tagline beneath card ── */
+.sponsor-tagline {
+  font-family: var(--f-body);
+  font-size: 15px;
+  color: var(--text-inv-2);
+  letter-spacing: .02em;
 }
 
-.s-plus {
-  font-size: 36px;
-  color: rgba(255, 255, 255, .3);
-  margin-bottom: 4px;
-  line-height: 1;
+.sponsor-tagline strong {
+  color: var(--paper);
+  font-weight: 600;
 }
 
 /* ==========================================================================
@@ -2034,7 +2109,7 @@ p {
   .hero-meta{ grid-template-columns:repeat(3,1fr); gap:16px; }
   .hero-mark{ width:clamp(140px, 20vw, 220px); right:clamp(10px, 3vw, 30px); top:50%; transform:translateY(-50%); opacity:0.65; }
   .footer-top{ grid-template-columns:1fr 1fr; }
-  .sponsor-grid{ grid-template-columns:repeat(2,1fr); gap:16px; }
+  .sponsor-featured-card{ width:min(440px, 88vw); padding:40px 32px; }
 }
 
 @media (max-width:640px){
@@ -2156,11 +2231,9 @@ p {
   .cd-label-light{ font-size:8.5px; letter-spacing:.06em; margin-top:3px; }
 
   /* Sponsors Mobile */
-  .sponsor-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
-  .sponsor-tile{ min-height:150px; padding:18px 10px; border-radius:10px; }
-  .s-visual{ width:54px; height:54px; font-size:18px; margin-bottom:4px; }
-  .sponsor-tile .s-name{ font-size:14px; margin-top:2px; }
-  .sponsor-tile .s-tier{ font-size:9px; margin-top:2px; }
+  .sponsor-featured-card{ width:92vw; padding:32px 20px; border-radius:16px; }
+  .sponsor-img-wrap{ width:240px; }
+  .sponsor-tagline{ font-size:13px; }
 
   /* 3. Perfectly Settled Mobile Timeline Schedule */
   .day-toggle{ width:100%; margin-bottom:28px; border-radius:6px; }
@@ -2256,5 +2329,6 @@ p {
   .countdown-grid-light{ grid-template-columns:repeat(2, 1fr); gap:6px; }
   .cd-unit-light{ padding:12px 6px; }
   .cd-num-light{ font-size:28px; }
-  .sponsor-grid{ grid-template-columns:1fr; }
+  .sponsor-featured-card{ padding:24px 14px; }
+  .sponsor-img-wrap{ width:190px; }
 }
