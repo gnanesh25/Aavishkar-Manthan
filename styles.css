@@ -1787,23 +1787,6 @@ p {
   transform: scale(1.04);
 }
 
-/* ── PDF logo (Thanco's) — fixed small size ── */
-.sponsor-logo-pdf {
-  width: 220px;
-  height: 120px;
-  max-width: 100%;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  pointer-events: none;
-  flex-shrink: 0;
-}
-
-.sponsor-img-wrap:has(.sponsor-logo-pdf) {
-  width: 220px;
-  max-width: 100%;
-}
-
 /* ── Title Sponsor badge ── */
 .sponsor-badge {
   position: relative;
