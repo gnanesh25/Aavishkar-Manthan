@@ -1689,9 +1689,11 @@ p {
 /* ── Container ── */
 .sponsor-featured {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 32px;
 }
 
 /* ── Card ── */
@@ -1783,6 +1785,16 @@ p {
     drop-shadow(0 0 28px rgba(255, 255, 255, .4))
     drop-shadow(0 0 60px rgba(240, 165, 55, .3));
   transform: scale(1.04);
+}
+
+/* ── PDF logo (Thanco's) ── */
+.sponsor-logo-pdf {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  pointer-events: none;
 }
 
 /* ── Title Sponsor badge ── */
